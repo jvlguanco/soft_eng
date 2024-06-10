@@ -51,60 +51,62 @@
                 </div>
             </div>
             
-            <div class="flex flex-col px-8 py-6">
-                <form action="{{ route('admin.set.result.submit', ['currentRoute' => $currentRoute, 'applicationType' => $applicationType, 'applicantId' => $applicantId]) }}" method="POST" class="flex flex-col gap-7" enctype="multipart/form-data">
-                    @csrf
-                    <div class="flex flex-row gap-3 mb-8">
-                        <div class="w-1/6">
-                            <x-input-label for="remarks" :value="__('Remarks')" />
-                            <div>
-                                <select name="remarks" id="remarks" class="block w-full mt-1" required>
-                                    <option value="" disabled selected>Please select</option>
-                                    <option value="with">With Course</option>
-                                    <option value="without">Without Course</option>
-                                    <option value="failed">Failed</option>
-                                </select>
+            <div class="flex flex-col items-center justify-center px-8 py-6">
+                <div class="w-5/6 px-8 py-4 bg-gray-200 border-2 border-black rounded-md h-5/8">
+                    <form action="{{ route('admin.set.result.submit', ['currentRoute' => $currentRoute, 'applicationType' => $applicationType, 'applicantId' => $applicantId]) }}" method="POST" class="flex flex-col gap-7" enctype="multipart/form-data">
+                        @csrf
+                        <div class="flex flex-row gap-3 mb-8">
+                            <div class="w-1/6">
+                                <x-input-label for="remarks" :value="__('Remarks')" />
+                                <div>
+                                    <select name="remarks" id="remarks" class="block w-full mt-1" required>
+                                        <option value="" disabled selected>Please select</option>
+                                        <option value="with">With Course</option>
+                                        <option value="without">Without Course</option>
+                                        <option value="failed">Failed</option>
+                                    </select>
+                                </div>
+                                <x-input-error :messages="$errors->get('remarks')" class="mt-2" />
                             </div>
-                            <x-input-error :messages="$errors->get('remarks')" class="mt-2" />
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row gap-3 mb-8">
-                        <div class="w-1/3">
-                            <x-input-label for="rank" :value="__('Ranking')" />
-                            <x-text-input id="rank" class="block w-full mt-1" type="number" name="rank" required autofocus/>
-                            <x-input-error :messages="$errors->get('rank')" class="mt-2" />
                         </div>
 
-                        <div class="w-1/3">
-                            <x-input-label for="score" :value="__('Exam Score')" />
-                            <x-text-input id="score" class="block w-full mt-1" type="number" name="score" required autofocus/>
-                            <x-input-error :messages="$errors->get('score')" class="mt-2" />
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row gap-3 mb-8" id="course_drop">
-                        <div class="w-1/2">
-                            <x-input-label for="course" :value="__('Course Assignment')" />
-                            <div>
-                                <select name="course" id="course" class="block w-full mt-1">
-                                    <option value="" disabled selected>Please select</option>
-                                    <option value="first">{{ $selectionInfo->choice1 }}</option>
-                                    <option value="second">{{ $selectionInfo->choice2 }}</option>
-                                    <option value="third">{{ $selectionInfo->choice3 }}</option>
-                                </select>
+                        <div class="flex flex-row gap-3 mb-8">
+                            <div class="w-1/3">
+                                <x-input-label for="rank" :value="__('Ranking')" />
+                                <x-text-input id="rank" class="block w-full mt-1" type="number" name="rank" required autofocus/>
+                                <x-input-error :messages="$errors->get('rank')" class="mt-2" />
                             </div>
-                            <x-input-error :messages="$errors->get('course')" class="mt-2" />
-                        </div>
-                    </div>
 
-                    <div class="flex justify-end w-full gap-4 mt-4">
-                        <a href="{{ route('admin.page', ['currentRoute'=>'result']) }}"class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">
-                            Back
-                        </a>
-                        <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
-                    </div>
-                </form>
+                            <div class="w-1/3">
+                                <x-input-label for="score" :value="__('Exam Score')" />
+                                <x-text-input id="score" class="block w-full mt-1" type="number" name="score" required autofocus/>
+                                <x-input-error :messages="$errors->get('score')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="flex flex-row gap-3 mb-8" id="course_drop">
+                            <div class="w-1/2">
+                                <x-input-label for="course" :value="__('Course Assignment')" />
+                                <div>
+                                    <select name="course" id="course" class="block w-full mt-1">
+                                        <option value="" disabled selected>Please select</option>
+                                        <option value="first">{{ $selectionInfo->choice1 }}</option>
+                                        <option value="second">{{ $selectionInfo->choice2 }}</option>
+                                        <option value="third">{{ $selectionInfo->choice3 }}</option>
+                                    </select>
+                                </div>
+                                <x-input-error :messages="$errors->get('course')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <a href="{{ route('admin.page', ['currentRoute'=>'result']) }}"class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">
+                                Back
+                            </a>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 

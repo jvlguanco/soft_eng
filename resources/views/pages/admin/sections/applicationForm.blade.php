@@ -18,19 +18,19 @@
 
         <div class="mt-6 md:flex md:items-center md:justify-between">
             <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg rtl:flex-row-reverse">
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'all' ? 'bg-gray-100' : 'hover:bg-gray-100'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=all'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'all' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=all'">
                     View all
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'approved' ? 'bg-gray-100' : 'hover:bg-gray-100'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=approved'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'approved' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=approved'">
                     Approved
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'pending' ? 'bg-gray-100' : 'hover:bg-gray-100'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=pending'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'pending' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=pending'">
                     Pending
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'resubmission' ? 'bg-gray-100' : 'hover:bg-gray-100'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=resubmission'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$statusType == 'resubmission' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type={{ $type }}&statusType=resubmission'">
                     Resubmission
                 </button>
             </div>
@@ -113,19 +113,19 @@
 
                                     <td class="px-4 py-4 text-sm whitespace-nowrap">
                                         @if ($applicant->applicationFormStatus == 'pending')
-                                            <div class="inline px-3 py-1 text-sm font-normal text-yellow-700 rounded-full gap-x-2 bg-yellow-200/60">
+                                            <div class="inline px-3 py-1 text-sm font-normal rounded-md text-yellow-950 gap-x-2 bg-yellow-200/60">
                                         @elseif ($applicant->applicationFormStatus == 'approved')
-                                            <div class="inline px-3 py-1 text-sm font-normal text-green-700 rounded-full gap-x-2 bg-green-200/60">
+                                            <div class="inline px-3 py-1 text-sm font-normal rounded-md text-green-950 gap-x-2 bg-green-200/60">
                                         @elseif ($applicant->applicationFormStatus == 'resubmission')
-                                            <div class="inline px-3 py-1 text-sm font-normal text-red-700 rounded-full gap-x-2 bg-red-200/60">
+                                            <div class="inline px-3 py-1 text-sm font-normal rounded-md text-red-950 gap-x-2 bg-red-200/60">
                                         @endif
                                             {{ ucfirst($applicant->applicationFormStatus) }}
                                         </div>
                                     </td>
 
                                     <td class="px-4 py-4 text-sm whitespace-nowrap">
-                                        <a href="{{ route('admin.verify.application_form', ['currentRoute' => $currentRoute, 'applicantId' => $applicant->applicant_id, 'applicationType' => $applicant->applicationType]) }}" class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-100 hover:rounded-full">
-                                            <div class="inline px-3 py-1 text-sm font-normal text-gray-700 rounded-full gap-x-2 bg-gray-200/60">
+                                        <a href="{{ route('admin.verify.application_form', ['currentRoute' => $currentRoute, 'applicantId' => $applicant->applicant_id, 'applicationType' => $applicant->applicationType]) }}" class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg hover:bg-gray-300 hover:rounded-full">
+                                            <div class="inline px-3 py-1 text-sm font-normal text-black bg-gray-300 rounded-md gap-x-2">
                                                 View
                                             </div>
                                         </a>

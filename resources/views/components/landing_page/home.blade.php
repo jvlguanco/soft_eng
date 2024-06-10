@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center w-3/4 h-auto gap-4 px-12 py-8 border-r-2 border-yellow-400">
-    <span class="text-4xl font-bold text-yellow-500">Welcome to PLM Online Admission</span>
+    <span class="text-4xl text-yellow-700 font-sans-serif">Welcome to PLM Online Admission</span>
 
-    <img src="{{ asset('assets/image/plm.png') }}" class="w-3/4 h-auto">
+    <img src="{{ asset('assets/image/plm.png') }}" class="w-5/6 h-auto">
 
     <div x-data="{ open: false }" class="flex flex-col w-5/6 h-auto px-6 py-4 bg-gray-200 rounded shadow-l gap-7">
         <button @click="open = !open" class="flex flex-row justify-between text-2xl focus:outline-none">

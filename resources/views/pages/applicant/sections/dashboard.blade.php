@@ -3,7 +3,7 @@
         <div class="flex flex-col items-center gap-8 pt-4">
             <div class="grid w-11/12 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl" style="grid-template-columns: 1fr 1fr;">
                 <div class="p-6">
-                    <h1 class="mb-4 text-lg font-semibold text-yellow-500">Personal Information</h1>
+                    <h1 class="mb-4 text-lg font-semibold text-blue-700">PERSONAL INFORMATION</h1>
 
                     <div class="w-full h-fit">
                         <div class="grid mb-4" style="grid-template-columns: 1fr 2fr;">
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="p-6">
-                    <h1 class="mb-4 text-lg font-semibold text-yellow-500">School Information</h1>
+                    <h1 class="mb-4 text-lg font-bold text-blue-700">SCHOOL INFORMATION</h1>
 
                     <div class="w-full h-fit">
                         <div class="grid mb-4" style="grid-template-columns: 1fr 2fr;">
@@ -70,7 +70,7 @@
             </div>
 
             <div class="w-11/12 p-4 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl">
-                <h1 class="mb-4 text-lg font-semibold text-yellow-500">Other Requirements Status</h1>
+                <h1 class="mb-4 text-lg font-semibold text-blue-700">OTHER  REQUIREMENTS STATUS</h1>
 
                 <div class="w-full h-fit">
                     <div class="grid gap-6 pb-3 font-semibold text-center" style="grid-template-columns: 2fr 1fr 3fr 1fr;">
@@ -83,18 +83,18 @@
                     <div class="grid gap-6 pb-4" style="grid-template-columns: 2fr 1fr 3fr 1fr;">
                         <h4 class="font-medium">Document: Birth Certificate</h4>
                         @if ($document->birthCertStatus == 'pending')
-                            <div class="flex items-center justify-center px-1 bg-yellow-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-yellow-300 rounded-md h-fit">
                         @elseif ($document->birthCertStatus == 'approved')
-                            <div class="flex items-center justify-center px-1 bg-green-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-green-300 rounded-md h-fit">
                         @elseif ($document->birthCertStatus == 'resubmission')
-                            <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                         @endif
                             {{ ucfirst($document->birthCertStatus) }}
                         </div>
                         <p>{{ $document->birthCertComment }}</p>
                         @if ($document->birthCertStatus == 'resubmission')
                             <button id="showFormButton1">
-                                <div class="flex items-center justify-center px-1 bg-yellow-300 h-fit rounded-2xl">Submit</div>
+                                <div class="flex items-center justify-center px-1 font-bold text-white bg-blue-600 rounded-md h-fit">SUBMIT</div>
                             </button>
                         @endif
                     </div>
@@ -113,20 +113,20 @@
                         </h4>
                             @if ($personalInfo->applicationType != 'OLD')
                                 @if ($document->othersStatus == 'pending')
-                                    <div class="flex items-center justify-center px-1 bg-yellow-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-yellow-300 rounded-md h-fit">
                                 @elseif ($document->othersStatus == 'approved')
-                                    <div class="flex items-center justify-center px-1 bg-green-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-green-300 rounded-md h-fit">
                                 @elseif ($document->othersStatus == 'resubmission')
-                                    <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                                 @endif
                                     {{ ucfirst($document->othersStatus) }}
                             @else
                                 @if ($document->approvalLetterStatus == 'pending')
-                                    <div class="flex items-center justify-center px-1 bg-yellow-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-yellow-300 rounded-md h-fit">
                                 @elseif ($document->approvalLetterStatus == 'approved')
-                                    <div class="flex items-center justify-center px-1 bg-green-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-green-300 rounded-md h-fit">
                                 @elseif ($document->approvalLetterStatus == 'resubmission')
-                                    <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                                    <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                                 @endif
                                     {{ ucfirst($document->approvalLetterStatus) }}
                             @endif
@@ -141,13 +141,13 @@
                         @if ($personalInfo->applicationType != 'OLD')
                             @if ($document->othersStatus == 'resubmission')
                                 <button id="showFormButton2">
-                                    <div class="flex items-center justify-center px-1 bg-yellow-300 h-fit rounded-2xl">Submit</div>
+                                    <div class="flex items-center justify-center px-1 font-bold text-white bg-blue-600 rounded-md h-fit">SUBMIT</div>
                                 </button>
                             @endif
                         @else
                             @if ($document->approvalLetterStatus == 'resubmission')
                                 <button id="showFormButton2">
-                                    <div class="flex items-center justify-center px-1 bg-yellow-300 h-fit rounded-2xl">Submit</div>
+                                    <div class="flex items-center justify-center px-1 font-bold text-white bg-blue-600 rounded-md h-fit">SUBMIT</div>
                                 </button>
                             @endif
                         @endif
@@ -157,18 +157,18 @@
                         <div class="grid gap-6 pb-4" style="grid-template-columns: 2fr 1fr 3fr 1fr;">
                             <h4 class="font-medium">Document: High School Card</h4>
                             @if ($document->highSchoolCardStatus == 'pending')
-                                <div class="flex items-center justify-center px-1 bg-yellow-500 rounded-2xl h-fit">
+                                <div class="flex items-center justify-center px-1 bg-yellow-300 rounded-md h-fit">
                             @elseif ($document->highSchoolCardStatus == 'approved')
-                                <div class="flex items-center justify-center px-1 bg-green-500 rounded-2xl h-fit">
+                                <div class="flex items-center justify-center px-1 bg-green-300 rounded-md h-fit">
                             @elseif ($document->highSchoolCardStatus == 'resubmission')
-                                <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                                <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                             @endif
                                 {{ ucfirst($document->highSchoolCardStatus) }}
                             </div>
                             <p>{{ $document->highSchoolCardComment }}</p>
                             @if ($document->highSchoolCardStatus == 'resubmission')
                                 <button id="showFormButton4">
-                                    <div class="flex items-center justify-center px-1 bg-yellow-300 h-fit rounded-2xl">Submit</div>
+                                    <div class="flex items-center justify-center px-1 font-bold text-white bg-blue-600 rounded-md h-fit">SUBMIT</div>
                                 </button>
                             @endif
                         </div>
@@ -178,13 +178,13 @@
                     <div class="grid gap-6 pb-4" style="grid-template-columns: 2fr 1fr 3fr 1fr;">
                         <h4 class="font-medium">Document: Application Form</h4>
                         @if($appStatus == 'Not Submitted')
-                            <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                         @elseif ($form->applicationFormStatus == 'pending' && $appStatus == 'Submitted')
-                            <div class="flex items-center justify-center px-1 bg-yellow-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-yellow-300 rounded-md h-fit">
                         @elseif ($form->applicationFormStatus == 'approved' && $appStatus == 'Submitted')
-                            <div class="flex items-center justify-center px-1 bg-green-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-green-300 rounded-md h-fit">
                         @elseif ($form->applicationFormStatus == 'resubmission' && $appStatus == 'Submitted')
-                            <div class="flex items-center justify-center px-1 bg-red-500 rounded-2xl h-fit">
+                            <div class="flex items-center justify-center px-1 bg-red-300 rounded-md h-fit">
                         @endif
                             @if ($appStatus == 'Submitted')
                                 {{ ucfirst($form->applicationFormStatus) }}
@@ -201,7 +201,7 @@
 
                         @if ($form == null || $form->applicationFormStatus == 'resubmission')
                             <button id="showFormButton3">
-                                <div class="flex items-center justify-center px-1 bg-yellow-300 h-fit rounded-2xl">Submit</div>
+                                <div class="flex items-center justify-center px-1 font-bold text-white bg-blue-600 rounded-md h-fit">SUBMIT</div>
                             </button>
                         @endif
                     </div>
@@ -212,17 +212,17 @@
 
         <div class="flex flex-col items-center gap-8 pt-4">
             <div class="w-11/12 p-4 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl">
-                <h1 class="mb-4 text-xl font-semibold text-yellow-500">Documents Status</h1>
+                <h1 class="mb-4 text-xl font-semibold text-blue-700">DOCUMENT STATUS</h1>
 
                 <div class="flex flex-col gap-8">
                     <div class="grid" style="grid-template-columns: 1fr 1fr;">
                         <h3>Requirements:</h3>
                         @if ($personalInfo->status == 'pending')
-                            <p class="w-full text-center bg-yellow-500 h-fit rounded-xl">
+                            <p class="w-full text-center text-black bg-yellow-300 rounded-md h-fit">
                         @elseif ($personalInfo->status == 'approved')
-                            <p class="w-full text-center bg-green-500 h-fit rounded-xl">
+                            <p class="w-full text-center text-black bg-green-300 rounded-md text-bold h-fit">
                         @elseif ($personalInfo->status == 'resubmission')
-                            <p class="w-full text-center bg-red-500 h-fit rounded-xl">
+                            <p class="w-full text-center text-black bg-red-300 rounded-md text-bold h-fit">
                         @endif
                             {{ ucfirst($personalInfo->status) }}
                         </p>
@@ -231,9 +231,9 @@
                     <div class="grid" style="grid-template-columns: 1fr 1fr;">
                         <h3>Application Form</h3>
                         @if( $applicationForm == "Not Available")
-                            <p class="w-full text-center bg-red-500 h-fit rounded-xl">
+                            <p class="w-full text-center bg-red-300 rounded-md h-fit">
                         @else
-                            <p class="w-full text-center bg-green-500 h-fit rounded-xl">
+                            <p class="w-full text-center text-black bg-green-300 rounded-md h-fit">
                         @endif
                             {{ $applicationForm }}
                         </p>
@@ -245,44 +245,46 @@
                         </div>
                     @elseif ($document->birthCertStatus != 'approved' && $document->othersStatus != 'approved')
                         <div class="flex items-center justify-around gap-4 py-4">
-                            <a href="{{ route('applicant.edit.information', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId]) }}" class="w-full h-6 text-center bg-blue-500 rounded-2xl">Edit Information</a>
+                            <a href="{{ route('applicant.edit.information', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId]) }}" class="w-full text-xl font-medium text-center text-white align-middle bg-blue-600 rounded-md h-7 ">EDIT INFORMATION</a>
                         </div>
                     @endif
                 </div>
             </div>
 
-            @if($form != null && $form->exam == 'without')
-            <div class="w-11/12 p-4 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl">
-                <h1 class="mb-4 text-xl font-semibold text-yellow-500">Exam Details Will Be Provided Soon!</h1>
-            </div>
-            @else
+            @if($applicationForm != "Not Available" && $form != null && $form->applicationFormStatus == 'approved')
+                @if($examDetails == null)
                 <div class="w-11/12 p-4 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl">
-                    <h1 class="mb-4 text-xl font-semibold text-yellow-500">Exam Details</h1>
-
-                    <div class="flex items-center justify-between p-2">
-                        <h3 class="font-semibold">Exam Date</h3>
-                        <p>{{ $examDetails->date }}</p>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2">
-                        <h3 class="font-semibold">Exam Time</h3>
-                        <p>{{ $examDetails->time }}</p>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2">
-                        <h3 class="font-semibold">Assigned Building</h3>
-                        <p>{{ $examDetails->building }}</p>
-                    </div>
-
-                    <div class="flex items-center justify-between p-2">
-                        <h3 class="font-semibold">Assigned Room</h3>
-                        <p>{{ $examDetails->room }}</p>
-                    </div>
-
-                    {{-- <div class="flex items-center justify-center w-full mt-4">
-                        <button id="download" class="w-10/12 bg-yellow-500 h-fit rounded-2xl">Download Exam Slip</button>
-                    </div> --}}
+                    <h1 class="mb-4 text-xl font-semibold text-blue-700">EXAM DETAILS WILL BE PROVIDED SOON!</h1>
                 </div>
+                @else
+                    <div class="w-11/12 p-4 bg-gray-100 border-2 border-gray-700 h-fit rounded-2xl">
+                        <h1 class="mb-4 text-xl font-semibold text-blue-700">EXAM DETAILS</h1>
+
+                        <div class="flex items-center justify-between p-2">
+                            <h3 class="font-semibold">Exam Date</h3>
+                            <p>{{ $examDetails->date }}</p>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2">
+                            <h3 class="font-semibold">Exam Time</h3>
+                            <p>{{ $examDetails->time }}</p>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2">
+                            <h3 class="font-semibold">Assigned Building</h3>
+                            <p>{{ $examDetails->building }}</p>
+                        </div>
+
+                        <div class="flex items-center justify-between p-2">
+                            <h3 class="font-semibold">Assigned Room</h3>
+                            <p>{{ $examDetails->room }}</p>
+                        </div>
+
+                        {{-- <div class="flex items-center justify-center w-full mt-4">
+                            <button id="download" class="w-10/12 bg-yellow-500 h-fit rounded-2xl">Download Exam Slip</button>
+                        </div> --}}
+                    </div>
+                @endif
             @endif
         </div>
     </div>

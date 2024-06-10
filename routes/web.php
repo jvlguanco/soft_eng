@@ -45,7 +45,15 @@ Route::get('/admin/{currentRoute}/{announcementId}/delete', [AdmissionPageContro
 Route::get('/admin/{currentRoute}/{announcementId}', [AdmissionPageController::class, 'AdmissionEditAnnouncement'])->name('admin.edit.announcement');
 Route::post('/admin/{currentRoute}/add', [AdmissionPageController::class, 'AdmissionAddAnnouncement'])->name('admin.add.announcement');
 Route::get('/admin/{currentRoute}/{applicationType}/{applicantId}', [AdmissionPageController::class, 'AdmissionApplicantVerify'])->name('admin.verify');
-Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/verify', [AdmissionPageController::class, 'AdmissionVerify'])->name('admin.verify.applicant');
+// Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/verify', [AdmissionPageController::class, 'AdmissionVerify'])->name('admin.verify.applicant');
+
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/birth', [AdmissionPageController::class, 'VerifyBirthCert'])->name('admin.verify.birth');
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/form', [AdmissionPageController::class, 'VerifyForm137'])->name('admin.verify.form');
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/als', [AdmissionPageController::class, 'VerifyAls'])->name('admin.verify.als');
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/tor', [AdmissionPageController::class, 'VerifyTOR'])->name('admin.verify.tor');
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/approval', [AdmissionPageController::class, 'AdmissionVerify'])->name('admin.verify.approval');
+Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/card', [AdmissionPageController::class, 'AdmissionVerify'])->name('admin.verify.card');
+
 Route::get('/admin/{currentRoute}/{applicationType}/{applicantId}/application', [AdmissionPageController::class, 'AdmissionApplicationFormVerify'])->name('admin.verify.application_form');
 Route::post('/admin/{currentRoute}/{applicationType}/{applicantId}/application/verify', [AdmissionPageController::class, 'AdmissionApplicationFormConfirm'])->name('admin.application_form');
 

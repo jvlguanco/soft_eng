@@ -39,26 +39,28 @@
                     <h1 class="text-2xl font-bold ">Documents of Applicant</h1>
 
                     <div class="flex justify-end gap-4">
-                        <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->birthCert) }}')">
+                        <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->birthCert) }}', 'birthCert')">
                             Birth Certificate
                         </button>
 
                         @if($abvAppType != 'OLD')
-                            <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->others) }}')">
                                 @if($abvAppType == 'SHS')
+                                <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->others) }}', 'form')">
                                     Form 137
                                 @elseif($abvAppType == 'ALS')
+                                <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->others)}}', 'als')">
                                     ALS Certificate
                                 @elseif($abvAppType == 'TRANSFER')
+                                <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->others) }}', 'tor')">
                                     TOR
                                 @endif
                             </button>
                         @else
-                            <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->approvalLetter) }}')">
+                            <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->approvalLetter) }}', 'approval')">
                                 Approval Letter
                             </button>
 
-                            <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->highSchoolCard) }}')">
+                            <button class="px-5 py-2 text-xs font-medium text-white transition-colors duration-200 bg-gray-700 sm:text-sm" onclick="changeDocument('{{ asset($documents->highSchoolCard) }}', 'card')">
                                 High School Card
                             </button>
                         @endif
@@ -77,12 +79,27 @@
                 </div>
             </div>
         </div>
-        <div id="floatingForm" class="hidden">
+        
+        <div id="floatingFormBirth" class="hidden">
             <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
                 <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
-                    <form action="{{ route('admin.verify.applicant', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                    <form action="{{ route('admin.verify.birth', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
                         @csrf
-                        <h1 class="mb-8">Return Status of Applicant</h1>
+                        <h1 class="mb-8">Return Status of Birth Certificate</h1>
+
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
+
+                            @if ($documents->birthCertStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->birthCertStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->birthCertStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->birthCertStatus) }}
+                                </span>
+                        </div>
                         
                         <div class="mb-4">
                             <x-input-label for="birthCert" :value="__('Birth Certificate Status')" />
@@ -100,15 +117,38 @@
                             <x-text-input id="birthCertComment" name="birthCertComment" class="block w-full mt-1" type="text" autocomplete="off"/>
                         </div>
                         
-                        @if($abvAppType != 'OLD')
-                            <div class="mb-4">
-                                @if($abvAppType == 'SHS')
-                                    <x-input-label for="others" :value="__('Form 137 Status')" />
-                                @elseif($abvAppType == 'ALS')
-                                    <x-input-label for="others" :value="__('ALS Certificate Status')" />
-                                @elseif($abvAppType == 'TRANSFER')
-                                    <x-input-label for="others" :value="__('TOR Status')" />
-                                @endif
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="floatingFormForm" class="hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
+                <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
+                    <form action="{{ route('admin.verify.form', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                        @csrf
+                        <h1 class="mb-8">Return Status of Form 137</h1>
+
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
+
+                            @if ($documents->othersStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->othersStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->othersStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->othersStatus) }}
+                                </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                                <x-input-label for="others" :value="__('Form 137 Status')" />
                                 
                                 <div>
                                     <select name="others" id="others" class="block w-full mt-1">
@@ -120,51 +160,198 @@
                             </div>
 
                             <div class="mb-4">
-                                @if($abvAppType == 'SHS')
-                                    <x-input-label for="othersComment" :value="__('Comment on Form 137')" />
-                                @elseif($abvAppType == 'ALS')
-                                    <x-input-label for="othersComment" :value="__('Comment on ALS Certificate')" />
-                                @elseif($abvAppType == 'TRANSFER')
-                                    <x-input-label for="othersComment" :value="__('Comment on TOR')" />
-                                @endif
-                                
+                                <x-input-label for="othersComment" :value="__('Comment on Form 137')" />
                                 <x-text-input id="othersComment" name="othersComment" class="block w-full mt-1" type="text" autocomplete="off"/>
                             </div>
-                        @else
-                            <div class="mb-4">
-                                <x-input-label for="approval" :value="__('Approval Letter Status')" />
-                                
-                                <div>
-                                    <select name="approval" id="approval" class="block w-full mt-1">
-                                        <option value="" disabled selected>Please select</option>
-                                        <option value="resubmission">Resubmit</option>
-                                        <option value="approved">Approved</option>
-                                    </select>
-                                </div>
-                            </div>
+                        
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-                            <div class="mb-4">
-                                <x-input-label for="approvalComment" :value="__('Comment on Approval Letter')" />
-                                <x-text-input id="approvalComment" name="approvalComment" class="block w-full mt-1" type="text" autocomplete="off"/>
-                            </div>
+        <div id="floatingFormAls" class="hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
+                <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
+                    <form action="{{ route('admin.verify.als', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                        @csrf
+                        <h1 class="mb-8">Return Status of ALS Certificate</h1>
 
-                            <div class="mb-4">
-                                <x-input-label for="highSchool" :value="__('High School Card Status')" />
-                                
-                                <div>
-                                    <select name="highSchool" id="highSchool" class="block w-full mt-1">
-                                        <option value="" disabled selected>Please select</option>
-                                        <option value="resubmission">Resubmit</option>
-                                        <option value="approved">Approved</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
 
-                            <div class="mb-4">
-                                <x-input-label for="highSchoolComment" :value="__('Comment on High School Card')" />
-                                <x-text-input id="highSchoolComment" name="highSchoolComment" class="block w-full mt-1" type="text" autocomplete="off"/>
+                            @if ($documents->othersStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->othersStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->othersStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->othersStatus) }}
+                                </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <x-input-label for="others" :value="__('ALS Certificate Status')" />
+                            
+                            <div>
+                                <select name="others" id="others" class="block w-full mt-1">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="resubmission">Resubmit</option>
+                                    <option value="approved">Approved</option>
+                                </select>
                             </div>
-                        @endif
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="othersComment" :value="__('Comment on ALS Certificate')" />
+                            <x-text-input id="othersComment" name="othersComment" class="block w-full mt-1" type="text" autocomplete="off"/>
+                        </div>
+                        
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="floatingFormTOR" class="hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
+                <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
+                    <form action="{{ route('admin.verify.tor', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                        @csrf
+                        <h1 class="mb-8">Return Status of TOR</h1>
+
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
+
+                            @if ($documents->othersStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->othersStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->othersStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->othersStatus) }}
+                                </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <x-input-label for="others" :value="__('TOR Status')" />
+                            
+                            <div>
+                                <select name="others" id="others" class="block w-full mt-1">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="resubmission">Resubmit</option>
+                                    <option value="approved">Approved</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="othersComment" :value="__('Comment on TOR')" />
+                            
+                            <x-text-input id="othersComment" name="othersComment" class="block w-full mt-1" type="text" autocomplete="off"/>
+                        </div>
+                        
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="floatingFormApproval" class="hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
+                <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
+                    <form action="{{ route('admin.verify.approval', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                        @csrf
+                        <h1 class="mb-8">Return Status of Approval Letter</h1>
+
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
+
+                            @if ($documents->approvalLetterStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->approvalLetterStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->approvalLetterStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->approvalLetterStatus) }}
+                                </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <x-input-label for="approval" :value="__('Approval Letter Status')" />
+                            
+                            <div>
+                                <select name="approval" id="approval" class="block w-full mt-1">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="resubmission">Resubmit</option>
+                                    <option value="approved">Approved</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="approvalComment" :value="__('Comment on Approval Letter')" />
+                            <x-text-input id="approvalComment" name="approvalComment" class="block w-full mt-1" type="text" autocomplete="off"/>
+                        </div>
+                        
+                        <div class="flex justify-end w-full gap-4 mt-4">
+                            <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
+                            <button type="submit" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-green-600">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="floatingFormCard" class="hidden">
+            <div class="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 backdrop-blur-md">
+                <div class="w-3/6 p-8 bg-white rounded-lg shadow-lg h-fit">
+                    <form action="{{ route('admin.verify.card', ['currentRoute' => $currentRoute, 'applicantId' => $applicantId, 'applicationType' => $abvAppType]) }}" method="POST">
+                        @csrf
+                        <h1 class="mb-8">Return Status of High School Card</h1>
+
+                        <div class="flex gap-4 mb-4">
+                            <h2 class="">Current Status:</h2>
+
+                            @if ($documents->highSchoolCardStatus == 'pending')
+                                <span class="px-2 py-4 text-center text-black bg-yellow-300 rounded-md w-44 h-fit">
+                            @elseif ($documents->highSchoolCardStatus == 'approved')
+                                <span class="text-center text-black bg-green-300 rounded-md w-44 text-bold h-fit">
+                            @elseif ($documents->highSchoolCardStatus == 'resubmission')
+                                <span class="mb-4 text-center text-black bg-red-300 rounded-md w-44 text-bold h-fit">
+                            @endif
+                                {{ ucfirst($documents->highSchoolCardStatus) }}
+                                </span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <x-input-label for="highSchool" :value="__('High School Card Status')" />
+                            
+                            <div>
+                                <select name="highSchool" id="highSchool" class="block w-full mt-1">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="resubmission">Resubmit</option>
+                                    <option value="approved">Approved</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <x-input-label for="highSchoolComment" :value="__('Comment on High School Card')" />
+                            <x-text-input id="highSchoolComment" name="highSchoolComment" class="block w-full mt-1" type="text" autocomplete="off"/>
+                        </div>
                         
                         <div class="flex justify-end w-full gap-4 mt-4">
                             <button type="button" onclick="toggleForm()" class="px-5 py-2 text-sm font-medium text-white transition-colors duration-200 bg-red-600">Cancel</button>
@@ -177,13 +364,41 @@
     </body>
 
     <script>
-        function changeDocument(path) {
+        var type = 'birthCert';
+
+        function changeDocument(path, file) {
             const iframe = document.getElementById('documentViewer');
             iframe.src = path;
+            type = file;
+            console.log(type);
         }
 
         function toggleForm() {
-            var form = document.getElementById('floatingForm');
+            if (type == 'birthCert') 
+            {
+                var form = document.getElementById('floatingFormBirth');
+            } 
+            else if (type == 'form') 
+            {
+                var form = document.getElementById('floatingFormForm');
+            } 
+            else if (type == 'als')
+            {
+                var form = document.getElementById('floatingFormAls');
+            }
+            else if (type == 'tor')
+            {
+                var form = document.getElementById('floatingFormTOR');
+            }
+            else if (type == 'approval')
+            {
+                var form = document.getElementById('floatingFormApproval');
+            }
+            else if (type == 'card')
+            {
+                var form = document.getElementById('floatingFormCard');
+            }
+            
             form.classList.toggle('hidden');
         }
 

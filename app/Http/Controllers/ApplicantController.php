@@ -145,26 +145,28 @@ class ApplicantController extends Controller
         $routeSegment = request()->segment(1);
 
         $examDetails = ExamSchedule::where('applicant_id', $applicantId)->first();
-        $examDetails->date = Carbon::parse($examDetails->date)->format('F j, Y');
+        if($examDetails != null) {
+            $examDetails->date = Carbon::parse($examDetails->date)->format('F j, Y');
 
-        if($examDetails->building == "GL"){
-            $examDetails->building = "Gusaling Lacson";
-        } else if ($examDetails->building == "GV"){
-            $examDetails->building = "Gusaling Villegas";
-        } else if ($examDetails->building == "GA"){
-            $examDetails->building = "Gusaling Atienza";
-        } else if ($examDetails->building == "GC"){
-            $examDetails->building = "Gusaling Corazon";
+            if($examDetails->building == "GL"){
+                $examDetails->building = "Gusaling Lacson";
+            } else if ($examDetails->building == "GV"){
+                $examDetails->building = "Gusaling Villegas";
+            } else if ($examDetails->building == "GA"){
+                $examDetails->building = "Gusaling Atienza";
+            } else if ($examDetails->building == "GC"){
+                $examDetails->building = "Gusaling Corazon";
+            }
+
+            if($examDetails->courseOffer == "first"){
+                $examDetails->courseOffer = $selectionInfo->choice1;
+            } else if ($examDetails->courseOffer == "second"){
+                $examDetails->courseOffer = $selectionInfo->choice2;
+            } else if ($examDetails->courseOffer == "third"){
+                $examDetails->courseOffer = $selectionInfo->choice3;
+            }
         }
-
-        if($examDetails->courseOffer == "first"){
-            $examDetails->courseOffer = $selectionInfo->choice1;
-        } else if ($examDetails->courseOffer == "second"){
-            $examDetails->courseOffer = $selectionInfo->choice2;
-        } else if ($examDetails->courseOffer == "third"){
-            $examDetails->courseOffer = $selectionInfo->choice3;
-        }
-
+        
         return view('pages.applicant.applicant', compact('currentRoute', 'routeSegment', 'personalInfo', 'selectionInfo', 'schoolInfo', 'document', 'applicantId', 'applicationForm', 'appStatus', 'form', 'examDetails'));
     }
 

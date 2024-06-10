@@ -124,15 +124,15 @@
 
                                         <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
                                             @if($applicant->remark == 'with')
-                                                <span class="px-3 py-1 text-xs text-green-800 bg-green-100 rounded-full">
+                                                <span class="px-3 py-1 text-xs text-green-800 bg-green-100 rounded-md">
                                                     Passed with Course
                                                 </span>
                                             @elseif($applicant->remark == 'without')
-                                                <span class="px-3 py-1 text-xs text-yellow-800 bg-yellow-100 rounded-full">
+                                                <span class="px-3 py-1 text-xs text-yellow-800 bg-yellow-100 rounded-md">
                                                     Waitlisted
                                                 </span>
                                             @else
-                                                <span class="px-3 py-1 text-xs text-red-800 bg-red-100 rounded-full">
+                                                <span class="px-3 py-1 text-xs text-red-800 bg-red-100 rounded-md">
                                                     Failed
                                                 </span>
                                             @endif

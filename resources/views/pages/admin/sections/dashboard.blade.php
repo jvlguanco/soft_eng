@@ -91,19 +91,16 @@
     </div>
 
     <div class="flex items-center justify-between mt-16">
-        <div class="flex flex-col gap-6">
-            <form action="{{ route('admin.generate.report', ['currentRoute' =>$currentRoute]) }}" method="POST" target="__blank">
-                @csrf
-                <select id="chartSelector" name="select">
-                    <option value="first">Progress, Gender, & Applicant Type Statistics</option>
-                    <option value="second">Regions & Manila/Non-Manila Statistics</option>
-                    <option value="third">Strand & Public/Private Statistics</option>
-                </select>
-            
-                <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded-lg">Generate Report</button>
-            </form>
+        <div class="flex flex-col gap-6 no-print">
+            <select id="chartSelector" name="select">
+                <option value="first">Progress, Gender, & Applicant Type Statistics</option>
+                <option value="second">Regions & Manila/Non-Manila Statistics</option>
+                <option value="third">Strand & Public/Private Statistics</option>
+            </select>
+        
+            <button onclick="window.print()" class="px-4 py-2 text-white bg-blue-600 rounded-lg">Generate Report</button>
         </div>
-        <div>
+        <div class="no-print">
             <h1>Actions for Inactive Applicant:</h1>
             <h1>Total Inactive Applicant: {{ $inactive }}</h1>
             <div class="flex h-10 gap-8 mt-2">

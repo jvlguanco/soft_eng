@@ -1,4 +1,4 @@
-<div class="flex items-center justify-between px-8 py-1 bg-white border-b-2 border-yellow-400">
+<div class="flex items-center justify-between px-8 py-1 bg-white border-b-2 border-yellow-400 no-print">
     <div class="flex items-center gap-4">
         <!-- Logo -->
         <img src="{{ asset('../assets/image/school.png') }}" alt="Image Description" class="w-20 h-20">

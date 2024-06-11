@@ -13,6 +13,14 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <style>
+            @media print {
+                .no-print {
+                    display: none;
+                }
+            }
+        </style>
     </head>
     <body class="antialiased">
         @include('components.dashboard.header')

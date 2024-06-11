@@ -12,12 +12,12 @@
             </div>
         </div>
 
-        <div class="gap-16 mt-6 md:flex md:items-center">
+        <div class="mt-6 gap-36 md:flex md:items-center">
             <div class="w-1/3">
                 Application Type Filter
             </div>
 
-            <div class="w-1/3 pl-6">
+            <div class="w-1/3">
                 Status Filter
             </div>
         </div>
@@ -28,19 +28,19 @@
                     View all
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'SHS' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type=SHS&statusType={{ $statusType }}'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'SHS' ? 'bg-gray-100' : 'hover:bg-gray-300'}} w-28" onclick="window.location.href='{{ url()->current() }}?type=SHS&statusType={{ $statusType }}'">
                     SHS
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'ALS' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type=ALS&statusType={{ $statusType }}'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'ALS' ? 'bg-gray-100' : 'hover:bg-gray-300'}} w-28" onclick="window.location.href='{{ url()->current() }}?type=ALS&statusType={{ $statusType }}'">
                     ALS
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'OLD' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type=OLD&statusType={{ $statusType }}'">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'OLD' ? 'bg-gray-100' : 'hover:bg-gray-300'}} w-28" onclick="window.location.href='{{ url()->current() }}?type=OLD&statusType={{ $statusType }}'">
                     OLD
                 </button>
 
-                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'TRANSFER' ? 'bg-gray-100' : 'hover:bg-gray-300'}}" onclick="window.location.href='{{ url()->current() }}?type=TRANSFER&statusType={{ $statusType }}'">
+                <button class="px-3 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm {{$type == 'TRANSFER' ? 'bg-gray-100' : 'hover:bg-gray-300'}} w-28" onclick="window.location.href='{{ url()->current() }}?type=TRANSFER&statusType={{ $statusType }}'">
                     TRANSFEREE
                 </button>
             </div>

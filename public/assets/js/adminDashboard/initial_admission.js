@@ -41,12 +41,6 @@ const dataGender = {
 const optionGender = {
     plugins: {
         datalabels: {
-            formatter: (value, ctx) => {
-                const dataset = ctx.chart.data.datasets[0];
-                const total = dataset.data.reduce((acc, data) => acc + data, 0);
-                const percentage = Math.round((value / total) * 100);
-                return percentage + '%';
-            },
             font: {
                 size: 16,
                 weight: 'bold',
@@ -141,12 +135,6 @@ const dataManilaRatio = {
 const optionManilaRatio = {
     plugins: {
         datalabels: {
-            formatter: (value, ctx) => {
-                const dataset = ctx.chart.data.datasets[0];
-                const total = dataset.data.reduce((acc, data) => acc + data, 0);
-                const percentage = Math.round((value / total) * 100);
-                return percentage + '%';
-            },
             font: {
                 size: 16,
                 weight: 'bold',
@@ -211,12 +199,6 @@ const dataManilaSchool = {
 const optionManilaSchool = {
     plugins: {
         datalabels: {
-            formatter: (value, ctx) => {
-                const dataset = ctx.chart.data.datasets[0];
-                const total = dataset.data.reduce((acc, data) => acc + data, 0);
-                const percentage = Math.round((value / total) * 100);
-                return percentage + '%';
-            },
             font: {
                 size: 16,
                 weight: 'bold',

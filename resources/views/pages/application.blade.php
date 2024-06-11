@@ -663,6 +663,20 @@
         </div>
 
         <script>
+            document.getElementById('terms-and-privacy').disabled = true; 
+
+            document.getElementById('showFormButton1').addEventListener('click', function() {
+                toggleForm1(); 
+                document.getElementById('terms-and-privacy').disabled = false;
+            });
+
+            document.getElementById('terms-and-privacy').addEventListener('click', function() {
+                if (!this.checked) { 
+                    alert("Please view the Data Privacy Consent Form before agreeing.");
+                    this.checked = false;
+                }
+            });
+
             function toggleForm1() {
                 var form = document.getElementById('floatingForm1');
                 var body = document.body;
@@ -677,8 +691,6 @@
                     body.classList.add('no-scroll');
                 }
             }
-
-            document.getElementById('showFormButton1').addEventListener('click', toggleForm1);
             
             var schools = @json($schools);
             const search = document.querySelector('.search-bar');
